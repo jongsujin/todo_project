@@ -25,6 +25,26 @@ const Title = styled.h1`
 const TodoList = styled.div``;
 
 export function HomePage(): React.JSX.Element {
+  const [todoList, setTodoList] = React.useState<ITodoItem[]>([
+    {
+      id: '1',
+      content: '첫 번째 투두',
+      completed: true,
+      editing: false,
+    },
+    {
+      id: '2',
+      content: '두 번째 투두',
+      completed: true,
+      editing: false,
+    },
+    {
+      id: '3',
+      content: '세 번째 투두',
+      completed: true,
+      editing: false,
+    },
+  ]);
   return (
     <>
       <Helmet>
@@ -34,29 +54,18 @@ export function HomePage(): React.JSX.Element {
       <Wrapper>
         <Box>
           <Title>할 일</Title>
-          <TodoInput></TodoInput>
+          <TodoInput
+            setTodoList={(todo: ITodoItem) => setTodoList([todo, ...todoList])}
+          ></TodoInput>
           <TodoList>
+            {todoList.map(todo => (
+              <TodoItem todo={todo} />
+            ))}
             <TodoItem
               todo={{
                 id: '1',
                 completed: false,
                 content: '투두입니다 1',
-                editing: false,
-              }}
-            ></TodoItem>
-            <TodoItem
-              todo={{
-                id: '2',
-                completed: true,
-                content: '투두입니다 2',
-                editing: false,
-              }}
-            ></TodoItem>
-            <TodoItem
-              todo={{
-                id: '3',
-                completed: false,
-                content: '투두입니다 3',
                 editing: false,
               }}
             ></TodoItem>
